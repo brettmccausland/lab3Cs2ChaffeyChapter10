@@ -21,7 +21,7 @@ int main()
     system("clear");
     //Exercise10_1();
     //Exercise10_5();
-     Exercise10_6();
+    // Exercise10_6();
 
 
   return 0;
