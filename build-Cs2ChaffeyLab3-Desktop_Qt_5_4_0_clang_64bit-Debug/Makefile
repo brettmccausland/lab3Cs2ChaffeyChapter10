@@ -157,6 +157,7 @@ DIST          = ../../../Qt/5.4/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.4/clang_64/mkspecs/features/qt_config.prf \
 		../../../Qt/5.4/clang_64/mkspecs/macx-clang/qmake.conf \
 		../../../Qt/5.4/clang_64/mkspecs/features/spec_post.prf \
+		../Cs2ChaffeyLab3/.qmake.stash \
 		../../../Qt/5.4/clang_64/mkspecs/features/exclusive_builds.prf \
 		../../../Qt/5.4/clang_64/mkspecs/features/default_pre.prf \
 		../../../Qt/5.4/clang_64/mkspecs/features/mac/default_pre.prf \
@@ -172,7 +173,7 @@ DIST          = ../../../Qt/5.4/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.4/clang_64/mkspecs/features/exceptions.prf \
 		../../../Qt/5.4/clang_64/mkspecs/features/yacc.prf \
 		../../../Qt/5.4/clang_64/mkspecs/features/lex.prf \
-		../Cs2ChaffeyLab3/Cs2ChaffeyLab3.pro  ../Cs2ChaffeyLab3/main.cpp
+		../Cs2ChaffeyLab3/Cs2ChaffeyLab3.pro triangle.h ../Cs2ChaffeyLab3/main.cpp
 QMAKE_TARGET  = Cs2ChaffeyLab3
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = Cs2ChaffeyLab3
@@ -320,6 +321,7 @@ Makefile: ../Cs2ChaffeyLab3/Cs2ChaffeyLab3.pro ../../../Qt/5.4/clang_64/mkspecs/
 		../../../Qt/5.4/clang_64/mkspecs/features/qt_config.prf \
 		../../../Qt/5.4/clang_64/mkspecs/macx-clang/qmake.conf \
 		../../../Qt/5.4/clang_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../../Qt/5.4/clang_64/mkspecs/features/exclusive_builds.prf \
 		../../../Qt/5.4/clang_64/mkspecs/features/default_pre.prf \
 		../../../Qt/5.4/clang_64/mkspecs/features/mac/default_pre.prf \
@@ -444,6 +446,7 @@ Makefile: ../Cs2ChaffeyLab3/Cs2ChaffeyLab3.pro ../../../Qt/5.4/clang_64/mkspecs/
 ../../../Qt/5.4/clang_64/mkspecs/features/qt_config.prf:
 ../../../Qt/5.4/clang_64/mkspecs/macx-clang/qmake.conf:
 ../../../Qt/5.4/clang_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../../Qt/5.4/clang_64/mkspecs/features/exclusive_builds.prf:
 ../../../Qt/5.4/clang_64/mkspecs/features/default_pre.prf:
 ../../../Qt/5.4/clang_64/mkspecs/features/mac/default_pre.prf:
@@ -504,7 +507,7 @@ compiler_clean:
 
 ####### Compile
 
-main.o: ../Cs2ChaffeyLab3/main.cpp 
+main.o: ../Cs2ChaffeyLab3/main.cpp ../Cs2ChaffeyLab3/triangle.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Cs2ChaffeyLab3/main.cpp
 
 ####### Install

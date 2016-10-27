@@ -1,28 +1,43 @@
 #include<iostream>
 #include <vector>
+#include"triangle.h"
 using namespace std;
-void Exercise10_1();//brett(done)
-void Exercise10_5();//brett (done)
-void Exercise10_6();//brett(done)
-void Exercise10_2();//rex
-void Exercise10_12();//rex
-void Exercise10_9();//elizabeth
-void Exercise10_14();//andre
+void Exercise10_1();//(done)
+void Exercise10_5();//(done)
+void Exercise10_6();//(done)
+void Exercise10_2();//(done)
+void Exercise10_12();//(done)
+void Exercise10_9();//(done)
+void Exercise10_14();//(done)
+
+
 void print(const vector<int>& a);
 bool next_permutation(vector<int>& a);
 int RecursiveFactorial(int n);
+void ReverseRecursively(char a[], int front, int back);
 void reverse(vector<int>& a, int i, int j);
-void swap(int& x, int& y);
+
+template<typename Item_type>
+void Swap(Item_type& x, Item_type& y);
+
 bool substringmatch(string find, string match);
 int substringindex(string find, string match, int &index);
 void indexIncrement(int& index,int increment);
+void reverse();
+void TowersHanoi(int m, string a, string b, string c);
+int polygonArea(int x[], int y[], int b, int end);
 int main()
 {
     system("clear");
-    //Exercise10_1();
-    //Exercise10_5();
-    // Exercise10_6();
+    cout<<"Lab 3"<<endl;
+    Exercise10_1();
+    Exercise10_2();
+    Exercise10_14();
 
+    Exercise10_5();
+    Exercise10_6();
+    Exercise10_12();
+    Exercise10_9();
 
   return 0;
 }
@@ -39,18 +54,34 @@ int RecursiveFactorial(int n)
         return 1;
     return n * RecursiveFactorial(n-1);
 }
+void ReverseRecursively(char a[], int front, int back)
+ {
+     if(back-front<=0)
+         return;
+     else
+     {
+         Swap(a[back],a[front]);
+          --back;
+          ++front;
+          ReverseRecursively(a,front,back);
+        }
+ }
 
 void Exercise10_2()
 {
-  // Write a recursive function void reverse() that reverses a sentence.
+
+  // Write a recursive function that reverses a sentence.
   // For example:
   // Sentence greeting = new Sentence("Hello!");
-  // greeting.reverse();
-  // cout << greeting.get_text() << "\n";
   // prints the string "!olleH".
   // Implement a recursive solution by removing the first character,
-  // reversing a sentence consisting of the remaining text,
-  // and combining the two.
+
+
+    char sentence[13]={"Hello There!"};
+    ReverseRecursively(sentence,0,12);
+    for(int i=0;i<13;i++)
+        cout<<sentence[i];
+    cout<<endl;
 }
 void Exercise10_5()
 {
@@ -129,16 +160,35 @@ void Exercise10_9()
     //Cut off a triangle and use the fact that a triangle
     //with corners (x1,y1), (x2,y2), (x3,y3)
   // has area (x1y2 + x2y3 + x3y1 − y1x2 − y2x3 − y3x1) 2.
+    int x[]={1,4,6,3,4,6};
+    int y[]={3,4,6,3,4,6};
+    int area=0;
+    area=polygonArea(x,y,0,6);
+    cout<<"area:"<<area<<endl;
+
 
 }
+int polygonArea(int x[],int y[],int b,int end)
+{
+    //int x1, int y1, int x2, int y2, int y3, int x3)
+
+    if(b<=end-3)
+    {
+        Triangle a(x[b], y[b], x[b+1], y[b+1], y[b+2], x[b+2]);
+        return a.get_area()+polygonArea(x,y,b+2,end);
+    }
+    else
+        return 0;
+}
+
 void Exercise10_12()
 {
+
     const int n = 4;
      vector<int> a(n);
      for (int i = 0; i < a.size(); i++)
        {
-
-         a[i] = i;
+          a[i] = i;
          print(a);
      }
      while (next_permutation(a))
@@ -151,10 +201,29 @@ void Exercise10_14()
   //the puzzle for n disks. (Ask the user for n at the beginning
   // of the program.)
   // Print moves in the form Move disk from peg 1 to peg 3
+    int discs;
+      cout << "Enter the number of discs: " << endl;
+      cin >> discs;
+      TowersHanoi(discs, "Left", "Middle", "Right");
+
 }
-void swap(int& x, int& y)
+void TowersHanoi(int m, string Left, string Middle, string Right)
 {
-  int temp = x;
+  if(m == 1)
+  {
+    cout << "Move disc " << m << " from " << Left << " to " << Right << endl;
+  }
+  else
+  {
+    TowersHanoi(m-1, Left,Right,Middle);
+    cout << "Move disc " << m << " from " << Left << " to " << Right << endl;
+    TowersHanoi(m-1,Middle,Left,Right);
+  }
+}
+template<typename Item_type>
+void Swap(Item_type& x, Item_type& y)
+{
+  Item_type temp = x;
   x = y;
   y = temp;
 }
@@ -172,7 +241,7 @@ bool next_permutation(vector<int>& a)
         {
            int j = a.size() - 1;
            while (a[i - 1] > a[j]) j--;
-           swap(a[i - 1], a[j]);
+           Swap(a[i - 1], a[j]);
            reverse(a, i, a.size() - 1);
            return true;
         }
@@ -183,7 +252,7 @@ void reverse(vector<int>& a, int i, int j)
 {
   while (i < j)
   {
-    swap(a[i], a[j]);
+    Swap(a[i], a[j]);
     i++;
     j--;
   }
